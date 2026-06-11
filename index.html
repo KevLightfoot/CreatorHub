@@ -41,6 +41,14 @@
 
     textarea {
       min-height: 90px;
+      
+    }
+
+    @media print {
+      textarea {
+        height: auto !important;
+        overflow: visible !important;
+      }
     }
 
     .checkbox-group label {
@@ -98,10 +106,19 @@ Please answer as throurough as possible.
 <label>7. If I could only build ONE feature for you, what would it be?</label>
 <textarea rows="6"></textarea>
 
-<button type="button" onclick="window.print()">
+<button type="button" onclick="preparePrint()">
 Save Responses as PDF
 </button>
 
+  <script>
+    function preparePrint(){
+      document.querySelectorAll("textarea").forEach(textarea => {
+        textarea.style.height = "auto";
+        textarea.style.height = textarea.scrollHeight + "px";
+      });
+      window.print();
+    }
+  </script>
 
 </body>
 </html>
